@@ -1,0 +1,17 @@
+CREATE TABLE character_table(
+    id INT NOT NULL,    
+    name TEXT,
+    status TEXT,
+    species TEXT,
+    type TEXT,
+    gender TEXT,
+    image TEXT,    
+    url TEXT,
+    created DATETIME,
+    origin_id,
+    location_id,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (origin_id) REFERENCES location_table(id),
+    FOREIGN KEY (location_id) REFERENCES location_table(id)
+);

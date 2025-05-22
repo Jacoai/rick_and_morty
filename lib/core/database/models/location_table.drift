@@ -1,0 +1,10 @@
+CREATE TABLE location_table(
+    id INT NOT NULL,
+    name TEXT NOT NULL,
+    type TEXT,
+    dimension TEXT,
+    url TEXT,
+    created DATETIME,
+
+    PRIMARY KEY (id),    
+);
