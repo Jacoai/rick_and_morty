@@ -25,6 +25,8 @@ import '../../feature/favorite/data/repository/favorite_repository_impl.dart'
     as _i180;
 import '../../feature/favorite/domain/repositoty/abstract_favorite_repository.dart'
     as _i584;
+import '../../feature/favorite/domain/usecases/delete_from_favorite_usecase.dart'
+    as _i694;
 import '../../feature/favorite/domain/usecases/stream_characters_usecase.dart'
     as _i163;
 import '../database/database.dart' as _i660;
@@ -53,6 +55,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i163.StreamCharactersUsecase>(
       () => _i163.StreamCharactersUsecase(
+        repository: gh<_i584.AbstractFavoriteRepository>(),
+      ),
+    );
+    gh.factory<_i694.DeleteFromFavoriteUsecase>(
+      () => _i694.DeleteFromFavoriteUsecase(
         repository: gh<_i584.AbstractFavoriteRepository>(),
       ),
     );

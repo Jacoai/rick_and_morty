@@ -7,10 +7,12 @@ class CharacterList extends StatelessWidget {
     super.key,
     required this.characters,
     required this.addToFavorite,
+    required this.removeFromFavorite,
   });
 
   final List<Character> characters;
   final Function(Character) addToFavorite;
+  final Function(int) removeFromFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,8 @@ class CharacterList extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: CharacterCardView(
               character: characters[index],
-              addFavorite: (character) => addToFavorite(character),
+              addToFavorite: (character) => addToFavorite(character),
+              removeFromFavorite: (id) => removeFromFavorite(id),
             ),
           ),
     );

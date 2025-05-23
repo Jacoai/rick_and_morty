@@ -1,5 +1,5 @@
 CREATE TABLE character_table(
-    id INT NOT NULL,    
+    id INTEGER NOT NULL,    
     name TEXT NOT NULL,
     status TEXT NOT NULL,
     species TEXT NOT NULL,

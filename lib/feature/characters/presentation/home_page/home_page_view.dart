@@ -33,6 +33,7 @@ class _HomePageViewState extends State<HomePageView> {
                 addToFavorite: (character) {
                   _bloc.add(AddToFavoriteEvent(character: character));
                 },
+                removeFromFavorite: (id) {},
               );
             },
           ),

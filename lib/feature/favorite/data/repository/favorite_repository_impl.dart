@@ -28,4 +28,9 @@ class FavoriteRepositoryImpl implements AbstractFavoriteRepository {
         )
         .watch();
   }
+
+  @override
+  Future<void> deleteFromFavorite(int id) async {
+    return db.delete(db.characterTable).where((tbl) => tbl.id.equals(id));
+  }
 }

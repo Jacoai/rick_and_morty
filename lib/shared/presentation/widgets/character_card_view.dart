@@ -5,17 +5,21 @@ class CharacterCardView extends StatefulWidget {
   const CharacterCardView({
     super.key,
     required this.character,
-    required this.addFavorite,
+    required this.addToFavorite,
+    required this.removeFromFavorite,
   });
 
   final Character character;
-  final Function(Character character) addFavorite;
+  final Function(Character character) addToFavorite;
+  final Function(int id) removeFromFavorite;
 
   @override
   State<CharacterCardView> createState() => _CharacterCardViewState();
 }
 
 class _CharacterCardViewState extends State<CharacterCardView> {
+  bool isFavorite = false;
+
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -29,8 +33,17 @@ class _CharacterCardViewState extends State<CharacterCardView> {
             children: [
               Text(widget.character.name),
               IconButton(
-                onPressed: () => widget.addFavorite(widget.character),
-                icon: Icon(Icons.star_border),
+                onPressed: () {
+                  setState(() {
+                    isFavorite = !isFavorite;
+                    if (isFavorite) {
+                      widget.removeFromFavorite(widget.character.id);
+                    } else {
+                      widget.addToFavorite(widget.character);
+                    }
+                  });
+                },
+                icon: isFavorite ? Icon(Icons.star) : Icon(Icons.star_border),
               ),
             ],
           ),

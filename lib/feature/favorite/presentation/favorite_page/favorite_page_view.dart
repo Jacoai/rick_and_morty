@@ -26,13 +26,23 @@ class _FavoritePageViewState extends State<FavoritePageView> {
         create: (context) => _bloc,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: BlocBuilder<FavoritePageBloc, FavoritePageState>(
-            builder: (context, state) {
-              return CharacterList(
-                characters: state.characters,
-                addToFavorite: (character) {},
-              );
-            },
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("Избранное"),
+              BlocBuilder<FavoritePageBloc, FavoritePageState>(
+                builder: (context, state) {
+                  return Expanded(
+                    child: CharacterList(
+                      characters: state.characters,
+                      addToFavorite: (character) {},
+                      removeFromFavorite:
+                          (id) => _bloc.add(RemoveFromFavoriteEvent(id: id)),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),
