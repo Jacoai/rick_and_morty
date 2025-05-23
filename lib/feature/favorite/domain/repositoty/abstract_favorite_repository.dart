@@ -2,5 +2,5 @@ import 'package:rick_and_morty/feature/characters/domain/models/character/charac
 
 abstract class AbstractFavoriteRepository {
   Future<Stream<List<Character>>> streamCharacter();
-  Future<void> deleteFromFavorite(int id);
+  
 }

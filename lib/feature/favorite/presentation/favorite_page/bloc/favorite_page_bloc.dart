@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:rick_and_morty/core/injector/injector.dart';
 import 'package:rick_and_morty/feature/characters/domain/models/character/character.dart';
-import 'package:rick_and_morty/feature/favorite/domain/usecases/delete_from_favorite_usecase.dart';
+import 'package:rick_and_morty/feature/characters/domain/usecases/remove_from_favorite_use_case.dart';
 import 'package:rick_and_morty/feature/favorite/domain/usecases/stream_characters_usecase.dart';
 
 part 'favorite_page_event.dart';
@@ -18,7 +18,7 @@ class FavoritePageBloc extends Bloc<FavoritePageEvent, FavoritePageState> {
   final StreamCharactersUsecase _streamCharactersUsecase =
       getIt<StreamCharactersUsecase>();
 
-  final DeleteFromFavoriteUsecase _deleteFromFavoriteUsecase = getIt();
+  final RemoveFromFavoriteUseCase _deleteFromFavoriteUsecase = getIt();
 
   FutureOr<void> _favoritePageOpenedEvent(
     FavoritePageOpenedEvent event,
@@ -26,7 +26,10 @@ class FavoritePageBloc extends Bloc<FavoritePageEvent, FavoritePageState> {
   ) async {
     await emit.onEach<List<Character>>(
       await _streamCharactersUsecase.call(),
-      onData: (characters) => emit(state.copyWith(characters: characters)),
+      onData: (characters) {
+        characters.removeWhere((element) => element.isFavorite == false);
+        emit(state.copyWith(characters: characters));
+      },
     );
   }
 

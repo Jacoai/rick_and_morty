@@ -5,9 +5,7 @@ import 'package:path_provider/path_provider.dart';
 
 part 'database.g.dart';
 
-@DriftDatabase(
-  include: {'models/location_table.drift', 'models/character_table.drift'},
-)
+@DriftDatabase(include: {'models/character_table.drift'})
 @singleton
 class LocalDatabase extends _$LocalDatabase {
   LocalDatabase() : super(_openConnection());
@@ -17,7 +15,7 @@ class LocalDatabase extends _$LocalDatabase {
 
   static QueryExecutor _openConnection() {
     return driftDatabase(
-      name: 'my_database',
+      name: 'my_database_v1',
       native: const DriftNativeOptions(
         databaseDirectory: getApplicationSupportDirectory,
       ),

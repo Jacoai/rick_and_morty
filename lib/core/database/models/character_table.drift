@@ -1,5 +1,6 @@
 CREATE TABLE character_table(
     id INTEGER NOT NULL,    
+    is_favorite BOOL NOT NULL,
     name TEXT NOT NULL,
     status TEXT NOT NULL,
     species TEXT NOT NULL,
@@ -8,10 +9,6 @@ CREATE TABLE character_table(
     image TEXT NOT NULL,    
     url TEXT NOT NULL,
     created DATETIME NOT NULL,
-    origin_id,
-    location_id,
-
+    
     PRIMARY KEY (id),
-    FOREIGN KEY (origin_id) REFERENCES location_table(id),
-    FOREIGN KEY (location_id) REFERENCES location_table(id)
 );

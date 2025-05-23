@@ -9,8 +9,10 @@ class CharacterApi {
 
   CharacterApi({required this.networkClient});
 
-  Future<List<Character>> getCharacters(int num) async {
-    final response = await networkClient.dio.get(Constant.characterEndpoint);
+  Future<List<Character>> getCharacters({int pageNum = 1}) async {
+    final response = await networkClient.dio.get(
+      "${Constant.characterEndpoint}/?page=$pageNum",
+    );
     List<dynamic> data = response.data['results'];
 
     List<Character> characters =

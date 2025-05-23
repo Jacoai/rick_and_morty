@@ -30,10 +30,12 @@ class _HomePageViewState extends State<HomePageView> {
             builder: (context, state) {
               return CharacterList(
                 characters: state.characters,
-                addToFavorite: (character) {
-                  _bloc.add(AddToFavoriteEvent(character: character));
+                addToFavorite: (id) {
+                  _bloc.add(AddToFavoriteEvent(id: id));
                 },
-                removeFromFavorite: (id) {},
+                removeFromFavorite: (id) {
+                  _bloc.add(RemoveFromFavoriteEvent(id: id));
+                },
               );
             },
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/feature/characters/domain/models/character/character.dart';
 
-class CharacterCardView extends StatefulWidget {
+class CharacterCardView extends StatelessWidget {
   const CharacterCardView({
     super.key,
     required this.character,
@@ -10,15 +10,8 @@ class CharacterCardView extends StatefulWidget {
   });
 
   final Character character;
-  final Function(Character character) addToFavorite;
-  final Function(int id) removeFromFavorite;
-
-  @override
-  State<CharacterCardView> createState() => _CharacterCardViewState();
-}
-
-class _CharacterCardViewState extends State<CharacterCardView> {
-  bool isFavorite = false;
+  final Function(int) addToFavorite;
+  final Function(int) removeFromFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -31,26 +24,25 @@ class _CharacterCardViewState extends State<CharacterCardView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(widget.character.name),
+              Text(character.name),
               IconButton(
                 onPressed: () {
-                  setState(() {
-                    isFavorite = !isFavorite;
-                    if (isFavorite) {
-                      widget.removeFromFavorite(widget.character.id);
-                    } else {
-                      widget.addToFavorite(widget.character);
-                    }
-                  });
+                  if (character.isFavorite) {
+                    removeFromFavorite(character.id);
+                  } else {
+                    addToFavorite(character.id);
+                  }
                 },
-                icon: isFavorite ? Icon(Icons.star) : Icon(Icons.star_border),
+                icon:
+                    character.isFavorite
+                        ? Icon(Icons.star)
+                        : Icon(Icons.star_border),
               ),
             ],
           ),
-          Image.network(widget.character.image),
-          Text("Пол: ${widget.character.gender}"),
-          Text("Статус: ${widget.character.status}"),
-          //Text("Последний раз был замечен в ${widget.character.location.name}"),
+          Image.network(character.image),
+          Text("Пол: ${character.gender}"),
+          Text("Статус: ${character.status}"),
         ],
       ),
     );

@@ -1,5 +1,7 @@
+import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rick_and_morty/core/database/database.dart';
+import 'package:rick_and_morty/feature/characters/data/converters/convertToCharecter.dart';
 import 'package:rick_and_morty/feature/characters/domain/models/character/character.dart';
 import 'package:rick_and_morty/feature/favorite/domain/repositoty/abstract_favorite_repository.dart';
 
@@ -13,24 +15,9 @@ class FavoriteRepositoryImpl implements AbstractFavoriteRepository {
   Future<Stream<List<Character>>> streamCharacter() async {
     return db
         .select(db.characterTable)
-        .map(
-          (character) => Character(
-            id: character.id,
-            name: character.name,
-            status: character.status,
-            species: character.species,
-            type: character.type,
-            gender: character.gender,
-            image: character.image,
-            url: character.url,
-            created: character.created,
-          ),
-        )
+        .map((character) => convertToCharacter(character))
         .watch();
   }
 
-  @override
-  Future<void> deleteFromFavorite(int id) async {
-    return db.delete(db.characterTable).where((tbl) => tbl.id.equals(id));
-  }
+  
 }
