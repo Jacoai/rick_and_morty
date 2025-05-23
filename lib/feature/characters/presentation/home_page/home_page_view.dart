@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/feature/characters/presentation/home_page/bloc/home_page_bloc.dart';
-import 'package:rick_and_morty/feature/characters/presentation/widgets/character_card_view.dart';
+import 'package:rick_and_morty/shared/presentation/widgets/character_list.dart';
 
 class HomePageView extends StatefulWidget {
   const HomePageView({super.key});
@@ -26,29 +26,18 @@ class _HomePageViewState extends State<HomePageView> {
         create: (context) => _bloc,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: characterList(),
+          child: BlocBuilder<HomePageBloc, HomePageState>(
+            builder: (context, state) {
+              return CharacterList(
+                characters: state.characters,
+                addToFavorite: (character) {
+                  _bloc.add(AddToFavoriteEvent(character: character));
+                },
+              );
+            },
+          ),
         ),
       ),
-    );
-  }
-
-  Widget characterList() {
-    return BlocBuilder<HomePageBloc, HomePageState>(
-      builder: (context, state) {
-        return ListView.builder(
-          itemCount: state.characters.length,
-          itemBuilder:
-              (context, index) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: CharacterCardView(
-                  character: state.characters[index],
-                  addFavorite:
-                      (character) =>
-                          _bloc.add(AddToFavoriteEvent(character: character)),
-                ),
-              ),
-        );
-      },
     );
   }
 }
