@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty/feature/characters/domain/models/character/character.dart';
 
 class CharacterCardView extends StatefulWidget {
-  const CharacterCardView({super.key, required this.character});
+  const CharacterCardView({
+    super.key,
+    required this.character,
+    required this.addFavorite,
+  });
 
   final Character character;
+  final Function(Character character) addFavorite;
 
   @override
   State<CharacterCardView> createState() => _CharacterCardViewState();
@@ -23,7 +28,10 @@ class _CharacterCardViewState extends State<CharacterCardView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(widget.character.name),
-              IconButton(onPressed: () {}, icon: Icon(Icons.star_border)),
+              IconButton(
+                onPressed: () => widget.addFavorite(widget.character),
+                icon: Icon(Icons.star_border),
+              ),
             ],
           ),
           Image.network(widget.character.image),

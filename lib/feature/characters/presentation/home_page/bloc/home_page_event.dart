@@ -4,3 +4,8 @@ part of 'home_page_bloc.dart';
 sealed class HomePageEvent {}
 
 class HomePageOpenedEvent extends HomePageEvent {}
+
+class AddToFavoriteEvent extends HomePageEvent {
+  final Character character;
+  AddToFavoriteEvent({required this.character});
+}

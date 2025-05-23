@@ -18,7 +18,7 @@ class Character with _$Character {
     required String image,
     required List<String> episode,
     required String url,
-    required String created,
+    required DateTime created,
   }) = _Character;
 
   factory Character.fromJson(Map<String, dynamic> json) =>

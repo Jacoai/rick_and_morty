@@ -34,7 +34,7 @@ mixin _$Character {
   String get image => throw _privateConstructorUsedError;
   List<String> get episode => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
-  String get created => throw _privateConstructorUsedError;
+  DateTime get created => throw _privateConstructorUsedError;
 
   /// Serializes this Character to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -63,7 +63,7 @@ abstract class $CharacterCopyWith<$Res> {
     String image,
     List<String> episode,
     String url,
-    String created,
+    DateTime created,
   });
 
   $CharacterLocationCopyWith<$Res> get origin;
@@ -159,7 +159,7 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
                 null == created
                     ? _value.created
                     : created // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as DateTime,
           )
           as $Val,
     );
@@ -207,7 +207,7 @@ abstract class _$$CharacterImplCopyWith<$Res>
     String image,
     List<String> episode,
     String url,
-    String created,
+    DateTime created,
   });
 
   @override
@@ -304,7 +304,7 @@ class __$$CharacterImplCopyWithImpl<$Res>
             null == created
                 ? _value.created
                 : created // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as DateTime,
       ),
     );
   }
@@ -362,7 +362,7 @@ class _$CharacterImpl implements _Character {
   @override
   final String url;
   @override
-  final String created;
+  final DateTime created;
 
   @override
   String toString() {
@@ -434,7 +434,7 @@ abstract class _Character implements Character {
     required final String image,
     required final List<String> episode,
     required final String url,
-    required final String created,
+    required final DateTime created,
   }) = _$CharacterImpl;
 
   factory _Character.fromJson(Map<String, dynamic> json) =
@@ -463,7 +463,7 @@ abstract class _Character implements Character {
   @override
   String get url;
   @override
-  String get created;
+  DateTime get created;
 
   /// Create a copy of Character
   /// with the given fields replaced by the non-null parameter values.

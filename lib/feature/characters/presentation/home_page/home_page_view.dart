@@ -40,7 +40,12 @@ class _HomePageViewState extends State<HomePageView> {
           itemBuilder:
               (context, index) => Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                child: CharacterCardView(character: state.characters[index]),
+                child: CharacterCardView(
+                  character: state.characters[index],
+                  addFavorite:
+                      (character) =>
+                          _bloc.add(AddToFavoriteEvent(character: character)),
+                ),
               ),
         );
       },
