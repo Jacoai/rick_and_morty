@@ -37,7 +37,7 @@ class _CharacterCardViewState extends State<CharacterCardView> {
           Image.network(widget.character.image),
           Text("Пол: ${widget.character.gender}"),
           Text("Статус: ${widget.character.status}"),
-          Text("Последний раз был замечен в ${widget.character.location.name}"),
+          //Text("Последний раз был замечен в ${widget.character.location.name}"),
         ],
       ),
     );

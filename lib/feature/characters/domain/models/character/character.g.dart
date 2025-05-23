@@ -6,24 +6,32 @@ part of 'character.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CharacterImpl _$$CharacterImplFromJson(
-  Map<String, dynamic> json,
-) => _$CharacterImpl(
-  id: (json['id'] as num).toInt(),
-  name: json['name'] as String,
-  status: json['status'] as String,
-  species: json['species'] as String,
-  type: json['type'] as String,
-  gender: json['gender'] as String,
-  origin: CharacterLocation.fromJson(json['origin'] as Map<String, dynamic>),
-  location: CharacterLocation.fromJson(
-    json['location'] as Map<String, dynamic>,
-  ),
-  image: json['image'] as String,
-  episode: (json['episode'] as List<dynamic>).map((e) => e as String).toList(),
-  url: json['url'] as String,
-  created: DateTime.parse(json['created'] as String),
-);
+_$CharacterImpl _$$CharacterImplFromJson(Map<String, dynamic> json) =>
+    _$CharacterImpl(
+      id: (json['id'] as num).toInt(),
+      name: json['name'] as String,
+      status: json['status'] as String,
+      species: json['species'] as String,
+      type: json['type'] as String,
+      gender: json['gender'] as String,
+      origin:
+          json['origin'] == null
+              ? null
+              : CharacterLocation.fromJson(
+                json['origin'] as Map<String, dynamic>,
+              ),
+      location:
+          json['location'] == null
+              ? null
+              : CharacterLocation.fromJson(
+                json['location'] as Map<String, dynamic>,
+              ),
+      image: json['image'] as String,
+      episode:
+          (json['episode'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      url: json['url'] as String,
+      created: DateTime.parse(json['created'] as String),
+    );
 
 Map<String, dynamic> _$$CharacterImplToJson(_$CharacterImpl instance) =>
     <String, dynamic>{

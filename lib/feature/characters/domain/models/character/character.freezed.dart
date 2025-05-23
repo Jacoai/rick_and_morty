@@ -27,12 +27,12 @@ mixin _$Character {
   String get species => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
-  CharacterLocation get origin =>
+  CharacterLocation? get origin =>
       throw _privateConstructorUsedError; // name and link to location
-  CharacterLocation get location =>
+  CharacterLocation? get location =>
       throw _privateConstructorUsedError; //name and link to last endpoint
   String get image => throw _privateConstructorUsedError;
-  List<String> get episode => throw _privateConstructorUsedError;
+  List<String>? get episode => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   DateTime get created => throw _privateConstructorUsedError;
 
@@ -58,16 +58,16 @@ abstract class $CharacterCopyWith<$Res> {
     String species,
     String type,
     String gender,
-    CharacterLocation origin,
-    CharacterLocation location,
+    CharacterLocation? origin,
+    CharacterLocation? location,
     String image,
-    List<String> episode,
+    List<String>? episode,
     String url,
     DateTime created,
   });
 
-  $CharacterLocationCopyWith<$Res> get origin;
-  $CharacterLocationCopyWith<$Res> get location;
+  $CharacterLocationCopyWith<$Res>? get origin;
+  $CharacterLocationCopyWith<$Res>? get location;
 }
 
 /// @nodoc
@@ -91,10 +91,10 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
     Object? species = null,
     Object? type = null,
     Object? gender = null,
-    Object? origin = null,
-    Object? location = null,
+    Object? origin = freezed,
+    Object? location = freezed,
     Object? image = null,
-    Object? episode = null,
+    Object? episode = freezed,
     Object? url = null,
     Object? created = null,
   }) {
@@ -131,25 +131,25 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
                     : gender // ignore: cast_nullable_to_non_nullable
                         as String,
             origin:
-                null == origin
+                freezed == origin
                     ? _value.origin
                     : origin // ignore: cast_nullable_to_non_nullable
-                        as CharacterLocation,
+                        as CharacterLocation?,
             location:
-                null == location
+                freezed == location
                     ? _value.location
                     : location // ignore: cast_nullable_to_non_nullable
-                        as CharacterLocation,
+                        as CharacterLocation?,
             image:
                 null == image
                     ? _value.image
                     : image // ignore: cast_nullable_to_non_nullable
                         as String,
             episode:
-                null == episode
+                freezed == episode
                     ? _value.episode
                     : episode // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
+                        as List<String>?,
             url:
                 null == url
                     ? _value.url
@@ -169,8 +169,12 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $CharacterLocationCopyWith<$Res> get origin {
-    return $CharacterLocationCopyWith<$Res>(_value.origin, (value) {
+  $CharacterLocationCopyWith<$Res>? get origin {
+    if (_value.origin == null) {
+      return null;
+    }
+
+    return $CharacterLocationCopyWith<$Res>(_value.origin!, (value) {
       return _then(_value.copyWith(origin: value) as $Val);
     });
   }
@@ -179,8 +183,12 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $CharacterLocationCopyWith<$Res> get location {
-    return $CharacterLocationCopyWith<$Res>(_value.location, (value) {
+  $CharacterLocationCopyWith<$Res>? get location {
+    if (_value.location == null) {
+      return null;
+    }
+
+    return $CharacterLocationCopyWith<$Res>(_value.location!, (value) {
       return _then(_value.copyWith(location: value) as $Val);
     });
   }
@@ -202,18 +210,18 @@ abstract class _$$CharacterImplCopyWith<$Res>
     String species,
     String type,
     String gender,
-    CharacterLocation origin,
-    CharacterLocation location,
+    CharacterLocation? origin,
+    CharacterLocation? location,
     String image,
-    List<String> episode,
+    List<String>? episode,
     String url,
     DateTime created,
   });
 
   @override
-  $CharacterLocationCopyWith<$Res> get origin;
+  $CharacterLocationCopyWith<$Res>? get origin;
   @override
-  $CharacterLocationCopyWith<$Res> get location;
+  $CharacterLocationCopyWith<$Res>? get location;
 }
 
 /// @nodoc
@@ -236,10 +244,10 @@ class __$$CharacterImplCopyWithImpl<$Res>
     Object? species = null,
     Object? type = null,
     Object? gender = null,
-    Object? origin = null,
-    Object? location = null,
+    Object? origin = freezed,
+    Object? location = freezed,
     Object? image = null,
-    Object? episode = null,
+    Object? episode = freezed,
     Object? url = null,
     Object? created = null,
   }) {
@@ -276,25 +284,25 @@ class __$$CharacterImplCopyWithImpl<$Res>
                 : gender // ignore: cast_nullable_to_non_nullable
                     as String,
         origin:
-            null == origin
+            freezed == origin
                 ? _value.origin
                 : origin // ignore: cast_nullable_to_non_nullable
-                    as CharacterLocation,
+                    as CharacterLocation?,
         location:
-            null == location
+            freezed == location
                 ? _value.location
                 : location // ignore: cast_nullable_to_non_nullable
-                    as CharacterLocation,
+                    as CharacterLocation?,
         image:
             null == image
                 ? _value.image
                 : image // ignore: cast_nullable_to_non_nullable
                     as String,
         episode:
-            null == episode
+            freezed == episode
                 ? _value._episode
                 : episode // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
+                    as List<String>?,
         url:
             null == url
                 ? _value.url
@@ -320,10 +328,10 @@ class _$CharacterImpl implements _Character {
     required this.species,
     required this.type,
     required this.gender,
-    required this.origin,
-    required this.location,
+    this.origin,
+    this.location,
     required this.image,
-    required final List<String> episode,
+    final List<String>? episode,
     required this.url,
     required this.created,
   }) : _episode = episode;
@@ -344,19 +352,21 @@ class _$CharacterImpl implements _Character {
   @override
   final String gender;
   @override
-  final CharacterLocation origin;
+  final CharacterLocation? origin;
   // name and link to location
   @override
-  final CharacterLocation location;
+  final CharacterLocation? location;
   //name and link to last endpoint
   @override
   final String image;
-  final List<String> _episode;
+  final List<String>? _episode;
   @override
-  List<String> get episode {
+  List<String>? get episode {
+    final value = _episode;
+    if (value == null) return null;
     if (_episode is EqualUnmodifiableListView) return _episode;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_episode);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -429,10 +439,10 @@ abstract class _Character implements Character {
     required final String species,
     required final String type,
     required final String gender,
-    required final CharacterLocation origin,
-    required final CharacterLocation location,
+    final CharacterLocation? origin,
+    final CharacterLocation? location,
     required final String image,
-    required final List<String> episode,
+    final List<String>? episode,
     required final String url,
     required final DateTime created,
   }) = _$CharacterImpl;
@@ -453,13 +463,13 @@ abstract class _Character implements Character {
   @override
   String get gender;
   @override
-  CharacterLocation get origin; // name and link to location
+  CharacterLocation? get origin; // name and link to location
   @override
-  CharacterLocation get location; //name and link to last endpoint
+  CharacterLocation? get location; //name and link to last endpoint
   @override
   String get image;
   @override
-  List<String> get episode;
+  List<String>? get episode;
   @override
   String get url;
   @override
