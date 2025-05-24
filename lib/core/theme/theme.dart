@@ -5,4 +5,4 @@ part 'src/light_theme.dart';
 
 part 'src/text_style.dart';
 part 'src/dark_theme.dart';
-// part 'src/src/theme_extension.dart';
+part 'src/theme_extension.dart';

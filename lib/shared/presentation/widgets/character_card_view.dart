@@ -18,7 +18,12 @@ class CharacterCardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.brown, width: 3),
+        border: Border.all(
+          color:
+              Theme.of(context).extension<ThemeColors>()?.accentColor ??
+              AppColors.brown,
+          width: 3,
+        ),
       ),
       child: Column(
         children: [
@@ -36,8 +41,20 @@ class CharacterCardView extends StatelessWidget {
                 },
                 icon:
                     character.isFavorite
-                        ? Icon(Icons.star)
-                        : Icon(Icons.star_border),
+                        ? Icon(
+                          Icons.star,
+                          color:
+                              Theme.of(
+                                context,
+                              ).extension<ThemeColors>()?.accentColor,
+                        )
+                        : Icon(
+                          Icons.star_border,
+                          color:
+                              Theme.of(
+                                context,
+                              ).extension<ThemeColors>()?.accentColor,
+                        ),
               ),
             ],
           ),

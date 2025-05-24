@@ -4,7 +4,7 @@ ThemeData createLightTheme() {
   return ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColors.yellow,
-    //    extensions: <ThemeExtension<dynamic>>[ThemeColors.light],
+    extensions: <ThemeExtension<dynamic>>[ThemeColors.light],
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.green,
       unselectedItemColor: AppColors.brown,

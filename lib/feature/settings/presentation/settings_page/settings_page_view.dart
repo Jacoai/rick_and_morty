@@ -36,7 +36,12 @@ class _SettingsPageViewState extends State<SettingsPageView> {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(30)),
-          border: Border.all(width: 2, color: AppColors.brown),
+          border: Border.all(
+            width: 2,
+            color:
+                Theme.of(context).extension<ThemeColors>()?.accentColor ??
+                AppColors.brown,
+          ),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15),
@@ -47,6 +52,7 @@ class _SettingsPageViewState extends State<SettingsPageView> {
             children: [
               const Text('Сменить тему', style: AppTextStyles.h1),
               Switch(
+                activeTrackColor: AppColors.green,
                 value: isLigthTheme,
                 onChanged: (value) {
                   setState(() {
