@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rick_and_morty/core/theme/theme.dart';
 import 'package:rick_and_morty/feature/characters/domain/models/character/character.dart';
 
 class CharacterCardView extends StatelessWidget {
@@ -17,14 +18,14 @@ class CharacterCardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.teal, width: 3),
+        border: Border.all(color: AppColors.brown, width: 3),
       ),
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(character.name),
+              Text(character.name, style: AppTextStyles.h5),
               IconButton(
                 onPressed: () {
                   if (character.isFavorite) {
@@ -40,9 +41,20 @@ class CharacterCardView extends StatelessWidget {
               ),
             ],
           ),
-          Image.network(character.image),
-          Text("Пол: ${character.gender}"),
-          Text("Статус: ${character.status}"),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColors.green,
+                width: 3,
+                strokeAlign: BorderSide.strokeAlignOutside,
+              ),
+            ),
+            child: Image.network(character.image),
+          ),
+          const SizedBox(height: 10),
+          Text("Пол: ${character.gender}", style: AppTextStyles.baseText),
+          Text("Статус: ${character.status}", style: AppTextStyles.baseText),
+          const SizedBox(height: 10),
         ],
       ),
     );

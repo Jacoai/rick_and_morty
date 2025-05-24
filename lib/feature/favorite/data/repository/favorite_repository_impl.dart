@@ -1,4 +1,3 @@
-import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rick_and_morty/core/database/database.dart';
 import 'package:rick_and_morty/feature/characters/data/converters/convertToCharecter.dart';
@@ -18,6 +17,4 @@ class FavoriteRepositoryImpl implements AbstractFavoriteRepository {
         .map((character) => convertToCharacter(character))
         .watch();
   }
-
-  
 }

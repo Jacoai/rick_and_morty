@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rick_and_morty/core/theme/theme.dart';
 import 'package:rick_and_morty/feature/favorite/presentation/favorite_page/bloc/favorite_page_bloc.dart';
 import 'package:rick_and_morty/shared/presentation/widgets/character_list.dart';
 
@@ -22,6 +23,7 @@ class _FavoritePageViewState extends State<FavoritePageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(toolbarHeight: 15),
       body: BlocProvider(
         create: (context) => _bloc,
         child: Padding(
@@ -29,7 +31,7 @@ class _FavoritePageViewState extends State<FavoritePageView> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("Избранное"),
+              Text("Избранное", style: AppTextStyles.h1),
               BlocBuilder<FavoritePageBloc, FavoritePageState>(
                 builder: (context, state) {
                   return Expanded(
