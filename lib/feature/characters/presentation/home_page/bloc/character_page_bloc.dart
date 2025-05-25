@@ -1,42 +1,45 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:rick_and_morty/core/injector/injector.dart';
 import 'package:rick_and_morty/feature/characters/domain/models/character/character.dart';
 import 'package:rick_and_morty/feature/characters/domain/usecases/add_to_favorite_use_case.dart';
 import 'package:rick_and_morty/feature/characters/domain/usecases/get_all_chactacters_use_case.dart';
 import 'package:rick_and_morty/feature/characters/domain/usecases/remove_from_favorite_use_case.dart';
+import 'package:rick_and_morty/feature/characters/domain/usecases/stream_characters_use_case.dart';
 
-part 'home_page_event.dart';
-part 'home_page_state.dart';
+part 'character_page_event.dart';
+part 'character_page_state.dart';
 
-class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
-  HomePageBloc() : super(HomePageState()) {
-    on<HomePageOpenedEvent>(_homePageOpenedEvent);
+class CharacterPageBloc extends Bloc<CharacterPageEvent, CharacterPageState> {
+  CharacterPageBloc() : super(CharacterPageState()) {
+    on<CharacterPageOpenedEvent>(_homePageOpenedEvent);
     on<AddToFavoriteEvent>(_addToFavoriteEvent);
     on<RemoveFromFavoriteEvent>(_removeFromFavoriteEvent);
+    on<LoadCharactersEvent>(_loadCharactersEvent);
   }
 
-  final GetAllChactactersUseCase getChactactersUseCase =
-      getIt<GetAllChactactersUseCase>();
+  final StreamCharactersUsecase _streamCharactersUsecase = getIt();
 
-  final AddToFavoriteUseCase addToFavoriteUseCase =
-      getIt<AddToFavoriteUseCase>();
+  final AddToFavoriteUseCase addToFavoriteUseCase = getIt();
 
   final RemoveFromFavoriteUseCase removeFromFavoriteUsecase = getIt();
 
-  FutureOr<void> _homePageOpenedEvent(
-    HomePageOpenedEvent event,
-    Emitter<HomePageState> emit,
+  Future<void> _homePageOpenedEvent(
+    CharacterPageOpenedEvent event,
+    Emitter<CharacterPageState> emit,
   ) async {
-    List<Character> characters = await getChactactersUseCase.call();
-    emit(state.copyWith(characters: characters));
+    await emit.onEach<List<Character>>(
+      await _streamCharactersUsecase.call(),
+      onData: (characters) {
+        emit(state.copyWith(characters: characters));
+      },
+    );
   }
 
-  FutureOr<void> _addToFavoriteEvent(
+  Future<void> _addToFavoriteEvent(
     AddToFavoriteEvent event,
-    Emitter<HomePageState> emit,
+    Emitter<CharacterPageState> emit,
   ) async {
     await addToFavoriteUseCase.call(event.id);
     //update character in state
@@ -49,9 +52,9 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     emit(state.copyWith(characters: characters));
   }
 
-  FutureOr<void> _removeFromFavoriteEvent(
+  Future<void> _removeFromFavoriteEvent(
     RemoveFromFavoriteEvent event,
-    Emitter<HomePageState> emit,
+    Emitter<CharacterPageState> emit,
   ) async {
     await removeFromFavoriteUsecase.call(event.id);
 
@@ -73,5 +76,12 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     int index = characters.indexWhere((element) => element.id == id);
     characters[index] = characters[index].copyWith(isFavorite: isFavorite);
     return characters;
+  }
+
+  FutureOr<void> _loadCharactersEvent(
+    LoadCharactersEvent event,
+    Emitter<CharacterPageState> emit,
+  ) {
+    print("LOADING");
   }
 }

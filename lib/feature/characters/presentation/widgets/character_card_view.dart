@@ -30,7 +30,14 @@ class CharacterCardView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(character.name, style: AppTextStyles.h5),
+              Expanded(
+                child: Text(
+                  character.name,
+                  style: AppTextStyles.h5,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.clip,
+                ),
+              ),
               IconButton(
                 onPressed: () {
                   if (character.isFavorite) {

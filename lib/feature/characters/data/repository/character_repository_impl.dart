@@ -15,24 +15,24 @@ class CharacterRepositoryImpl implements AbstractCharacterRepository {
 
   CharacterRepositoryImpl({required this.characterApi, required this.db});
 
-  @override
-  Future<List<Character>> getAllCharacters() async {
-    var query = await db.select(db.characterTable).get();
-    if (query.isEmpty) {
-      //if there are no entyties in DB
-      List<Character> characters = await characterApi.getCharacters();
-      //save them into DB
-      for (var character in characters) {
-        await db
-            .into(db.characterTable)
-            .insert(convertToCharacterTableData(character));
-      }
-      return characters;
-    } else {
-      // or get from DB
-      return query.map((e) => convertToCharacter(e)).toList();
-    }
-  }
+  // @override
+  // Future<List<Character>> getAllCharacters() async {
+  //   var query = await db.select(db.characterTable).get();
+  //   if (query.isEmpty) {
+  //     //if there are no entyties in DB
+  //     List<Character> characters = await characterApi.getCharacters();
+  //     //save them into DB
+  //     for (var character in characters) {
+  //       await db
+  //           .into(db.characterTable)
+  //           .insert(convertToCharacterTableData(character));
+  //     }
+  //     return characters;
+  //   } else {
+  //     // or get from DB
+  //     return query.map((e) => convertToCharacter(e)).toList();
+  //   }
+  // }
 
   @override
   Future<void> addToFavorite(int id) async {
@@ -46,5 +46,24 @@ class CharacterRepositoryImpl implements AbstractCharacterRepository {
     (db.update(db.characterTable)..where(
       (tbl) => tbl.id.equals(id),
     )).write(CharacterTableCompanion(isFavorite: Value(false)));
+  }
+
+  @override
+  Future<Stream<List<Character>>> streamCharacter() async {
+    var query = await db.select(db.characterTable).get();
+    if (query.isEmpty) {
+      //if there are no entyties in DB
+      List<Character> characters = await characterApi.getCharacters();
+      //save them into DB
+      for (var character in characters) {
+        await db
+            .into(db.characterTable)
+            .insert(convertToCharacterTableData(character));
+      }
+    }
+    return db
+        .select(db.characterTable)
+        .map((character) => convertToCharacter(character))
+        .watch();
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/core/theme/theme.dart';
-import 'package:rick_and_morty/feature/favorite/presentation/favorite_page/bloc/favorite_page_bloc.dart';
-import 'package:rick_and_morty/shared/presentation/widgets/character_list.dart';
+import 'package:rick_and_morty/feature/characters/presentation/favorite_page/bloc/favorite_page_bloc.dart';
+import 'package:rick_and_morty/feature/characters/presentation/widgets/character_list.dart';
 
 class FavoritePageView extends StatefulWidget {
   const FavoritePageView({super.key});

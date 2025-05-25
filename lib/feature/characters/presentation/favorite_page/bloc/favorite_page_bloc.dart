@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:rick_and_morty/core/injector/injector.dart';
 import 'package:rick_and_morty/feature/characters/domain/models/character/character.dart';
 import 'package:rick_and_morty/feature/characters/domain/usecases/remove_from_favorite_use_case.dart';
-import 'package:rick_and_morty/feature/favorite/domain/usecases/stream_characters_usecase.dart';
+import 'package:rick_and_morty/feature/characters/domain/usecases/stream_characters_use_case.dart';
 
 part 'favorite_page_event.dart';
 part 'favorite_page_state.dart';

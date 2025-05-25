@@ -6,9 +6,9 @@ import 'injector.config.dart';
 final getIt = GetIt.instance;
 
 @InjectableInit(
-  initializerName: 'init', // default
-  preferRelativeImports: true, // default
-  asExtension: true, // default
+  initializerName: 'init',
+  preferRelativeImports: true,
+  asExtension: true,
 )
 void configureDependencies() {
   getIt.init();
