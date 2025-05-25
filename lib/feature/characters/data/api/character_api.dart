@@ -20,15 +20,15 @@ class CharacterApi {
     return characters;
   }
 
-  Future<List<Character>> getCharacters({int pageNum = 1}) async {
-    final response = await networkClient.dio.get(
-      "${Constants.characterEndpoint}/?page=$pageNum",
-    );
-    List<dynamic> data = response.data['results'];
+  // Future<List<Character>> getCharacters({int pageNum = 1}) async {
+  //   final response = await networkClient.dio.get(
+  //     "${Constants.characterEndpoint}/?page=$pageNum",
+  //   );
+  //   List<dynamic> data = response.data['results'];
 
-    List<Character> characters =
-        data.map((character) => Character.fromJson(character)).toList();
+  //   List<Character> characters =
+  //       data.map((character) => Character.fromJson(character)).toList();
 
-    return characters;
-  }
+  //   return characters;
+  // }
 }
