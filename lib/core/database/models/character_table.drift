@@ -3,12 +3,9 @@ CREATE TABLE character_table(
     is_favorite BOOL NOT NULL,
     name TEXT NOT NULL,
     status TEXT NOT NULL,
-    species TEXT NOT NULL,
-    type TEXT NOT NULL,
+    species TEXT NOT NULL,    
     gender TEXT NOT NULL,
     image TEXT NOT NULL,    
-    url TEXT NOT NULL,
-    created DATETIME NOT NULL,
-    
+        
     PRIMARY KEY (id),
 );

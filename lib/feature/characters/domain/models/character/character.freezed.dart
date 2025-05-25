@@ -26,11 +26,8 @@ mixin _$Character {
   String get name => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get species => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
-  String get url => throw _privateConstructorUsedError;
-  DateTime get created => throw _privateConstructorUsedError;
 
   /// Serializes this Character to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,11 +50,8 @@ abstract class $CharacterCopyWith<$Res> {
     String name,
     String status,
     String species,
-    String type,
     String gender,
     String image,
-    String url,
-    DateTime created,
   });
 }
 
@@ -81,11 +75,8 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
     Object? name = null,
     Object? status = null,
     Object? species = null,
-    Object? type = null,
     Object? gender = null,
     Object? image = null,
-    Object? url = null,
-    Object? created = null,
   }) {
     return _then(
       _value.copyWith(
@@ -114,11 +105,6 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
                     ? _value.species
                     : species // ignore: cast_nullable_to_non_nullable
                         as String,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as String,
             gender:
                 null == gender
                     ? _value.gender
@@ -129,16 +115,6 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
                     ? _value.image
                     : image // ignore: cast_nullable_to_non_nullable
                         as String,
-            url:
-                null == url
-                    ? _value.url
-                    : url // ignore: cast_nullable_to_non_nullable
-                        as String,
-            created:
-                null == created
-                    ? _value.created
-                    : created // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
           )
           as $Val,
     );
@@ -160,11 +136,8 @@ abstract class _$$CharacterImplCopyWith<$Res>
     String name,
     String status,
     String species,
-    String type,
     String gender,
     String image,
-    String url,
-    DateTime created,
   });
 }
 
@@ -187,11 +160,8 @@ class __$$CharacterImplCopyWithImpl<$Res>
     Object? name = null,
     Object? status = null,
     Object? species = null,
-    Object? type = null,
     Object? gender = null,
     Object? image = null,
-    Object? url = null,
-    Object? created = null,
   }) {
     return _then(
       _$CharacterImpl(
@@ -220,11 +190,6 @@ class __$$CharacterImplCopyWithImpl<$Res>
                 ? _value.species
                 : species // ignore: cast_nullable_to_non_nullable
                     as String,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as String,
         gender:
             null == gender
                 ? _value.gender
@@ -235,16 +200,6 @@ class __$$CharacterImplCopyWithImpl<$Res>
                 ? _value.image
                 : image // ignore: cast_nullable_to_non_nullable
                     as String,
-        url:
-            null == url
-                ? _value.url
-                : url // ignore: cast_nullable_to_non_nullable
-                    as String,
-        created:
-            null == created
-                ? _value.created
-                : created // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
       ),
     );
   }
@@ -259,11 +214,8 @@ class _$CharacterImpl implements _Character {
     required this.name,
     required this.status,
     required this.species,
-    required this.type,
     required this.gender,
     required this.image,
-    required this.url,
-    required this.created,
   });
 
   factory _$CharacterImpl.fromJson(Map<String, dynamic> json) =>
@@ -281,19 +233,13 @@ class _$CharacterImpl implements _Character {
   @override
   final String species;
   @override
-  final String type;
-  @override
   final String gender;
   @override
   final String image;
-  @override
-  final String url;
-  @override
-  final DateTime created;
 
   @override
   String toString() {
-    return 'Character(id: $id, isFavorite: $isFavorite, name: $name, status: $status, species: $species, type: $type, gender: $gender, image: $image, url: $url, created: $created)';
+    return 'Character(id: $id, isFavorite: $isFavorite, name: $name, status: $status, species: $species, gender: $gender, image: $image)';
   }
 
   @override
@@ -307,11 +253,8 @@ class _$CharacterImpl implements _Character {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.species, species) || other.species == species) &&
-            (identical(other.type, type) || other.type == type) &&
             (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.image, image) || other.image == image) &&
-            (identical(other.url, url) || other.url == url) &&
-            (identical(other.created, created) || other.created == created));
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -323,11 +266,8 @@ class _$CharacterImpl implements _Character {
     name,
     status,
     species,
-    type,
     gender,
     image,
-    url,
-    created,
   );
 
   /// Create a copy of Character
@@ -351,11 +291,8 @@ abstract class _Character implements Character {
     required final String name,
     required final String status,
     required final String species,
-    required final String type,
     required final String gender,
     required final String image,
-    required final String url,
-    required final DateTime created,
   }) = _$CharacterImpl;
 
   factory _Character.fromJson(Map<String, dynamic> json) =
@@ -372,15 +309,9 @@ abstract class _Character implements Character {
   @override
   String get species;
   @override
-  String get type;
-  @override
   String get gender;
   @override
   String get image;
-  @override
-  String get url;
-  @override
-  DateTime get created;
 
   /// Create a copy of Character
   /// with the given fields replaced by the non-null parameter values.

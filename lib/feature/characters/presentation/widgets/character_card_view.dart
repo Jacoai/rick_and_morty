@@ -78,6 +78,8 @@ class CharacterCardView extends StatelessWidget {
           const SizedBox(height: 10),
           Text("Пол: ${character.gender}", style: AppTextStyles.baseText),
           Text("Статус: ${character.status}", style: AppTextStyles.baseText),
+          Text("Вид: ${character.species}", style: AppTextStyles.baseText),
+          Text("Пол: ${character.gender}", style: AppTextStyles.baseText),
           const SizedBox(height: 10),
         ],
       ),

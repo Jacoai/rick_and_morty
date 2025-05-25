@@ -11,11 +11,8 @@ class Character with _$Character {
     required String name,
     required String status,
     required String species,
-    required String type,
     required String gender,
     required String image,
-    required String url,
-    required DateTime created,
   }) = _Character;
 
   factory Character.fromJson(Map<String, dynamic> json) =>

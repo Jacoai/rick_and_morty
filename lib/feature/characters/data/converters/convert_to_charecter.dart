@@ -8,10 +8,7 @@ Character convertToCharacter(CharacterTableData tableData) {
     name: tableData.name,
     status: tableData.status,
     species: tableData.species,
-    type: tableData.type,
     gender: tableData.gender,
     image: tableData.image,
-    url: tableData.url,
-    created: tableData.created,
   );
 }

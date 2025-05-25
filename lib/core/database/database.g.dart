@@ -58,15 +58,6 @@ class CharacterTable extends Table
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
-  static const VerificationMeta _typeMeta = const VerificationMeta('type');
-  late final GeneratedColumn<String> type = GeneratedColumn<String>(
-    'type',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL',
-  );
   static const VerificationMeta _genderMeta = const VerificationMeta('gender');
   late final GeneratedColumn<String> gender = GeneratedColumn<String>(
     'gender',
@@ -85,26 +76,6 @@ class CharacterTable extends Table
     requiredDuringInsert: true,
     $customConstraints: 'NOT NULL',
   );
-  static const VerificationMeta _urlMeta = const VerificationMeta('url');
-  late final GeneratedColumn<String> url = GeneratedColumn<String>(
-    'url',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL',
-  );
-  static const VerificationMeta _createdMeta = const VerificationMeta(
-    'created',
-  );
-  late final GeneratedColumn<DateTime> created = GeneratedColumn<DateTime>(
-    'created',
-    aliasedName,
-    false,
-    type: DriftSqlType.dateTime,
-    requiredDuringInsert: true,
-    $customConstraints: 'NOT NULL',
-  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -112,11 +83,8 @@ class CharacterTable extends Table
     name,
     status,
     species,
-    type,
     gender,
     image,
-    url,
-    created,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -165,14 +133,6 @@ class CharacterTable extends Table
     } else if (isInserting) {
       context.missing(_speciesMeta);
     }
-    if (data.containsKey('type')) {
-      context.handle(
-        _typeMeta,
-        type.isAcceptableOrUnknown(data['type']!, _typeMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_typeMeta);
-    }
     if (data.containsKey('gender')) {
       context.handle(
         _genderMeta,
@@ -188,22 +148,6 @@ class CharacterTable extends Table
       );
     } else if (isInserting) {
       context.missing(_imageMeta);
-    }
-    if (data.containsKey('url')) {
-      context.handle(
-        _urlMeta,
-        url.isAcceptableOrUnknown(data['url']!, _urlMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_urlMeta);
-    }
-    if (data.containsKey('created')) {
-      context.handle(
-        _createdMeta,
-        created.isAcceptableOrUnknown(data['created']!, _createdMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_createdMeta);
     }
     return context;
   }
@@ -239,11 +183,6 @@ class CharacterTable extends Table
             DriftSqlType.string,
             data['${effectivePrefix}species'],
           )!,
-      type:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}type'],
-          )!,
       gender:
           attachedDatabase.typeMapping.read(
             DriftSqlType.string,
@@ -253,16 +192,6 @@ class CharacterTable extends Table
           attachedDatabase.typeMapping.read(
             DriftSqlType.string,
             data['${effectivePrefix}image'],
-          )!,
-      url:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}url'],
-          )!,
-      created:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}created'],
           )!,
     );
   }
@@ -285,22 +214,16 @@ class CharacterTableData extends DataClass
   final String name;
   final String status;
   final String species;
-  final String type;
   final String gender;
   final String image;
-  final String url;
-  final DateTime created;
   const CharacterTableData({
     required this.id,
     required this.isFavorite,
     required this.name,
     required this.status,
     required this.species,
-    required this.type,
     required this.gender,
     required this.image,
-    required this.url,
-    required this.created,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -310,11 +233,8 @@ class CharacterTableData extends DataClass
     map['name'] = Variable<String>(name);
     map['status'] = Variable<String>(status);
     map['species'] = Variable<String>(species);
-    map['type'] = Variable<String>(type);
     map['gender'] = Variable<String>(gender);
     map['image'] = Variable<String>(image);
-    map['url'] = Variable<String>(url);
-    map['created'] = Variable<DateTime>(created);
     return map;
   }
 
@@ -325,11 +245,8 @@ class CharacterTableData extends DataClass
       name: Value(name),
       status: Value(status),
       species: Value(species),
-      type: Value(type),
       gender: Value(gender),
       image: Value(image),
-      url: Value(url),
-      created: Value(created),
     );
   }
 
@@ -344,11 +261,8 @@ class CharacterTableData extends DataClass
       name: serializer.fromJson<String>(json['name']),
       status: serializer.fromJson<String>(json['status']),
       species: serializer.fromJson<String>(json['species']),
-      type: serializer.fromJson<String>(json['type']),
       gender: serializer.fromJson<String>(json['gender']),
       image: serializer.fromJson<String>(json['image']),
-      url: serializer.fromJson<String>(json['url']),
-      created: serializer.fromJson<DateTime>(json['created']),
     );
   }
   @override
@@ -360,11 +274,8 @@ class CharacterTableData extends DataClass
       'name': serializer.toJson<String>(name),
       'status': serializer.toJson<String>(status),
       'species': serializer.toJson<String>(species),
-      'type': serializer.toJson<String>(type),
       'gender': serializer.toJson<String>(gender),
       'image': serializer.toJson<String>(image),
-      'url': serializer.toJson<String>(url),
-      'created': serializer.toJson<DateTime>(created),
     };
   }
 
@@ -374,22 +285,16 @@ class CharacterTableData extends DataClass
     String? name,
     String? status,
     String? species,
-    String? type,
     String? gender,
     String? image,
-    String? url,
-    DateTime? created,
   }) => CharacterTableData(
     id: id ?? this.id,
     isFavorite: isFavorite ?? this.isFavorite,
     name: name ?? this.name,
     status: status ?? this.status,
     species: species ?? this.species,
-    type: type ?? this.type,
     gender: gender ?? this.gender,
     image: image ?? this.image,
-    url: url ?? this.url,
-    created: created ?? this.created,
   );
   CharacterTableData copyWithCompanion(CharacterTableCompanion data) {
     return CharacterTableData(
@@ -399,11 +304,8 @@ class CharacterTableData extends DataClass
       name: data.name.present ? data.name.value : this.name,
       status: data.status.present ? data.status.value : this.status,
       species: data.species.present ? data.species.value : this.species,
-      type: data.type.present ? data.type.value : this.type,
       gender: data.gender.present ? data.gender.value : this.gender,
       image: data.image.present ? data.image.value : this.image,
-      url: data.url.present ? data.url.value : this.url,
-      created: data.created.present ? data.created.value : this.created,
     );
   }
 
@@ -415,28 +317,15 @@ class CharacterTableData extends DataClass
           ..write('name: $name, ')
           ..write('status: $status, ')
           ..write('species: $species, ')
-          ..write('type: $type, ')
           ..write('gender: $gender, ')
-          ..write('image: $image, ')
-          ..write('url: $url, ')
-          ..write('created: $created')
+          ..write('image: $image')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(
-    id,
-    isFavorite,
-    name,
-    status,
-    species,
-    type,
-    gender,
-    image,
-    url,
-    created,
-  );
+  int get hashCode =>
+      Object.hash(id, isFavorite, name, status, species, gender, image);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -446,11 +335,8 @@ class CharacterTableData extends DataClass
           other.name == this.name &&
           other.status == this.status &&
           other.species == this.species &&
-          other.type == this.type &&
           other.gender == this.gender &&
-          other.image == this.image &&
-          other.url == this.url &&
-          other.created == this.created);
+          other.image == this.image);
 }
 
 class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
@@ -459,22 +345,16 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
   final Value<String> name;
   final Value<String> status;
   final Value<String> species;
-  final Value<String> type;
   final Value<String> gender;
   final Value<String> image;
-  final Value<String> url;
-  final Value<DateTime> created;
   const CharacterTableCompanion({
     this.id = const Value.absent(),
     this.isFavorite = const Value.absent(),
     this.name = const Value.absent(),
     this.status = const Value.absent(),
     this.species = const Value.absent(),
-    this.type = const Value.absent(),
     this.gender = const Value.absent(),
     this.image = const Value.absent(),
-    this.url = const Value.absent(),
-    this.created = const Value.absent(),
   });
   CharacterTableCompanion.insert({
     this.id = const Value.absent(),
@@ -482,31 +362,22 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
     required String name,
     required String status,
     required String species,
-    required String type,
     required String gender,
     required String image,
-    required String url,
-    required DateTime created,
   }) : isFavorite = Value(isFavorite),
        name = Value(name),
        status = Value(status),
        species = Value(species),
-       type = Value(type),
        gender = Value(gender),
-       image = Value(image),
-       url = Value(url),
-       created = Value(created);
+       image = Value(image);
   static Insertable<CharacterTableData> custom({
     Expression<int>? id,
     Expression<bool>? isFavorite,
     Expression<String>? name,
     Expression<String>? status,
     Expression<String>? species,
-    Expression<String>? type,
     Expression<String>? gender,
     Expression<String>? image,
-    Expression<String>? url,
-    Expression<DateTime>? created,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -514,11 +385,8 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
       if (name != null) 'name': name,
       if (status != null) 'status': status,
       if (species != null) 'species': species,
-      if (type != null) 'type': type,
       if (gender != null) 'gender': gender,
       if (image != null) 'image': image,
-      if (url != null) 'url': url,
-      if (created != null) 'created': created,
     });
   }
 
@@ -528,11 +396,8 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
     Value<String>? name,
     Value<String>? status,
     Value<String>? species,
-    Value<String>? type,
     Value<String>? gender,
     Value<String>? image,
-    Value<String>? url,
-    Value<DateTime>? created,
   }) {
     return CharacterTableCompanion(
       id: id ?? this.id,
@@ -540,11 +405,8 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
       name: name ?? this.name,
       status: status ?? this.status,
       species: species ?? this.species,
-      type: type ?? this.type,
       gender: gender ?? this.gender,
       image: image ?? this.image,
-      url: url ?? this.url,
-      created: created ?? this.created,
     );
   }
 
@@ -566,20 +428,11 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
     if (species.present) {
       map['species'] = Variable<String>(species.value);
     }
-    if (type.present) {
-      map['type'] = Variable<String>(type.value);
-    }
     if (gender.present) {
       map['gender'] = Variable<String>(gender.value);
     }
     if (image.present) {
       map['image'] = Variable<String>(image.value);
-    }
-    if (url.present) {
-      map['url'] = Variable<String>(url.value);
-    }
-    if (created.present) {
-      map['created'] = Variable<DateTime>(created.value);
     }
     return map;
   }
@@ -592,11 +445,8 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
           ..write('name: $name, ')
           ..write('status: $status, ')
           ..write('species: $species, ')
-          ..write('type: $type, ')
           ..write('gender: $gender, ')
-          ..write('image: $image, ')
-          ..write('url: $url, ')
-          ..write('created: $created')
+          ..write('image: $image')
           ..write(')'))
         .toString();
   }
@@ -620,11 +470,8 @@ typedef $CharacterTableCreateCompanionBuilder =
       required String name,
       required String status,
       required String species,
-      required String type,
       required String gender,
       required String image,
-      required String url,
-      required DateTime created,
     });
 typedef $CharacterTableUpdateCompanionBuilder =
     CharacterTableCompanion Function({
@@ -633,11 +480,8 @@ typedef $CharacterTableUpdateCompanionBuilder =
       Value<String> name,
       Value<String> status,
       Value<String> species,
-      Value<String> type,
       Value<String> gender,
       Value<String> image,
-      Value<String> url,
-      Value<DateTime> created,
     });
 
 class $CharacterTableFilterComposer
@@ -674,11 +518,6 @@ class $CharacterTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get type => $composableBuilder(
-    column: $table.type,
-    builder: (column) => ColumnFilters(column),
-  );
-
   ColumnFilters<String> get gender => $composableBuilder(
     column: $table.gender,
     builder: (column) => ColumnFilters(column),
@@ -686,16 +525,6 @@ class $CharacterTableFilterComposer
 
   ColumnFilters<String> get image => $composableBuilder(
     column: $table.image,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get url => $composableBuilder(
-    column: $table.url,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<DateTime> get created => $composableBuilder(
-    column: $table.created,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -734,11 +563,6 @@ class $CharacterTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get type => $composableBuilder(
-    column: $table.type,
-    builder: (column) => ColumnOrderings(column),
-  );
-
   ColumnOrderings<String> get gender => $composableBuilder(
     column: $table.gender,
     builder: (column) => ColumnOrderings(column),
@@ -746,16 +570,6 @@ class $CharacterTableOrderingComposer
 
   ColumnOrderings<String> get image => $composableBuilder(
     column: $table.image,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<String> get url => $composableBuilder(
-    column: $table.url,
-    builder: (column) => ColumnOrderings(column),
-  );
-
-  ColumnOrderings<DateTime> get created => $composableBuilder(
-    column: $table.created,
     builder: (column) => ColumnOrderings(column),
   );
 }
@@ -786,20 +600,11 @@ class $CharacterTableAnnotationComposer
   GeneratedColumn<String> get species =>
       $composableBuilder(column: $table.species, builder: (column) => column);
 
-  GeneratedColumn<String> get type =>
-      $composableBuilder(column: $table.type, builder: (column) => column);
-
   GeneratedColumn<String> get gender =>
       $composableBuilder(column: $table.gender, builder: (column) => column);
 
   GeneratedColumn<String> get image =>
       $composableBuilder(column: $table.image, builder: (column) => column);
-
-  GeneratedColumn<String> get url =>
-      $composableBuilder(column: $table.url, builder: (column) => column);
-
-  GeneratedColumn<DateTime> get created =>
-      $composableBuilder(column: $table.created, builder: (column) => column);
 }
 
 class $CharacterTableTableManager
@@ -838,22 +643,16 @@ class $CharacterTableTableManager
                 Value<String> name = const Value.absent(),
                 Value<String> status = const Value.absent(),
                 Value<String> species = const Value.absent(),
-                Value<String> type = const Value.absent(),
                 Value<String> gender = const Value.absent(),
                 Value<String> image = const Value.absent(),
-                Value<String> url = const Value.absent(),
-                Value<DateTime> created = const Value.absent(),
               }) => CharacterTableCompanion(
                 id: id,
                 isFavorite: isFavorite,
                 name: name,
                 status: status,
                 species: species,
-                type: type,
                 gender: gender,
                 image: image,
-                url: url,
-                created: created,
               ),
           createCompanionCallback:
               ({
@@ -862,22 +661,16 @@ class $CharacterTableTableManager
                 required String name,
                 required String status,
                 required String species,
-                required String type,
                 required String gender,
                 required String image,
-                required String url,
-                required DateTime created,
               }) => CharacterTableCompanion.insert(
                 id: id,
                 isFavorite: isFavorite,
                 name: name,
                 status: status,
                 species: species,
-                type: type,
                 gender: gender,
                 image: image,
-                url: url,
-                created: created,
               ),
           withReferenceMapper:
               (p0) =>
