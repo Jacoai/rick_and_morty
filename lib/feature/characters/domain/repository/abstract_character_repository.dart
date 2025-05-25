@@ -1,5 +1,10 @@
 import 'package:rick_and_morty/feature/characters/domain/models/character/character.dart';
 
 abstract class AbstractCharacterRepository {
-  Future<List<Character>> getCharacters(int num);
+  //Future<List<Character>> getAllCharacters();
+  Future<void> loadListCharacters(List<int> ids);
+  Future<Stream<List<Character>>> streamCharacter();
+  Future<Stream<List<Character>>> streamFavoriteCharacter();
+  Future<void> addToFavorite(int id);
+  Future<void> removeFromFavorite(int id);
 }

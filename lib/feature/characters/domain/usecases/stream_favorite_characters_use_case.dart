@@ -3,11 +3,12 @@ import 'package:rick_and_morty/feature/characters/domain/models/character/charac
 import 'package:rick_and_morty/feature/characters/domain/repository/abstract_character_repository.dart';
 
 @injectable
-class GetChactactersUseCase {
+class StreamFavoriteCharactersUseCase {
   final AbstractCharacterRepository repository;
-  GetChactactersUseCase(this.repository);
 
-  Future<List<Character>> call(int num) async {
-    return await repository.getCharacters(num);
+  StreamFavoriteCharactersUseCase({required this.repository});
+
+  Future<Stream<List<Character>>> call() async {
+    return repository.streamFavoriteCharacter();
   }
 }
