@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/core/theme/theme.dart';
 import 'package:rick_and_morty/feature/characters/presentation/favorite_page/bloc/favorite_page_bloc.dart';
 import 'package:rick_and_morty/feature/characters/presentation/widgets/character_card_view.dart';
+import 'package:rick_and_morty/feature/characters/presentation/widgets/dropdown_charater_sort.dart';
 
 class FavoritePageView extends StatefulWidget {
   const FavoritePageView({super.key});
@@ -32,6 +33,16 @@ class _FavoritePageViewState extends State<FavoritePageView> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text("Избранное", style: AppTextStyles.h1),
+              OverflowBar(
+                spacing: 18,
+                children: [
+                  const Text("Сортировть имена", style: AppTextStyles.baseText),
+                  DropdownCharaterSort(
+                    changeSort:
+                        (sort) => _bloc.add(ChangeSortEvent(sort: sort)),
+                  ),
+                ],
+              ),
               BlocBuilder<FavoritePageBloc, FavoritePageState>(
                 builder: (context, state) {
                   return Expanded(
