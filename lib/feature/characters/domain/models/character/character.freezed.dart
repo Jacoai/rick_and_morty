@@ -22,19 +22,12 @@ Character _$CharacterFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Character {
   int get id => throw _privateConstructorUsedError;
+  bool get isFavorite => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get species => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
-  CharacterLocation get origin =>
-      throw _privateConstructorUsedError; // name and link to location
-  CharacterLocation get location =>
-      throw _privateConstructorUsedError; //name and link to last endpoint
   String get image => throw _privateConstructorUsedError;
-  List<String> get episode => throw _privateConstructorUsedError;
-  String get url => throw _privateConstructorUsedError;
-  String get created => throw _privateConstructorUsedError;
 
   /// Serializes this Character to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,21 +46,13 @@ abstract class $CharacterCopyWith<$Res> {
   @useResult
   $Res call({
     int id,
+    bool isFavorite,
     String name,
     String status,
     String species,
-    String type,
     String gender,
-    CharacterLocation origin,
-    CharacterLocation location,
     String image,
-    List<String> episode,
-    String url,
-    String created,
   });
-
-  $CharacterLocationCopyWith<$Res> get origin;
-  $CharacterLocationCopyWith<$Res> get location;
 }
 
 /// @nodoc
@@ -86,17 +71,12 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
   @override
   $Res call({
     Object? id = null,
+    Object? isFavorite = null,
     Object? name = null,
     Object? status = null,
     Object? species = null,
-    Object? type = null,
     Object? gender = null,
-    Object? origin = null,
-    Object? location = null,
     Object? image = null,
-    Object? episode = null,
-    Object? url = null,
-    Object? created = null,
   }) {
     return _then(
       _value.copyWith(
@@ -105,6 +85,11 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
                     ? _value.id
                     : id // ignore: cast_nullable_to_non_nullable
                         as int,
+            isFavorite:
+                null == isFavorite
+                    ? _value.isFavorite
+                    : isFavorite // ignore: cast_nullable_to_non_nullable
+                        as bool,
             name:
                 null == name
                     ? _value.name
@@ -120,69 +105,19 @@ class _$CharacterCopyWithImpl<$Res, $Val extends Character>
                     ? _value.species
                     : species // ignore: cast_nullable_to_non_nullable
                         as String,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as String,
             gender:
                 null == gender
                     ? _value.gender
                     : gender // ignore: cast_nullable_to_non_nullable
                         as String,
-            origin:
-                null == origin
-                    ? _value.origin
-                    : origin // ignore: cast_nullable_to_non_nullable
-                        as CharacterLocation,
-            location:
-                null == location
-                    ? _value.location
-                    : location // ignore: cast_nullable_to_non_nullable
-                        as CharacterLocation,
             image:
                 null == image
                     ? _value.image
                     : image // ignore: cast_nullable_to_non_nullable
                         as String,
-            episode:
-                null == episode
-                    ? _value.episode
-                    : episode // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            url:
-                null == url
-                    ? _value.url
-                    : url // ignore: cast_nullable_to_non_nullable
-                        as String,
-            created:
-                null == created
-                    ? _value.created
-                    : created // ignore: cast_nullable_to_non_nullable
-                        as String,
           )
           as $Val,
     );
-  }
-
-  /// Create a copy of Character
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CharacterLocationCopyWith<$Res> get origin {
-    return $CharacterLocationCopyWith<$Res>(_value.origin, (value) {
-      return _then(_value.copyWith(origin: value) as $Val);
-    });
-  }
-
-  /// Create a copy of Character
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $CharacterLocationCopyWith<$Res> get location {
-    return $CharacterLocationCopyWith<$Res>(_value.location, (value) {
-      return _then(_value.copyWith(location: value) as $Val);
-    });
   }
 }
 
@@ -197,23 +132,13 @@ abstract class _$$CharacterImplCopyWith<$Res>
   @useResult
   $Res call({
     int id,
+    bool isFavorite,
     String name,
     String status,
     String species,
-    String type,
     String gender,
-    CharacterLocation origin,
-    CharacterLocation location,
     String image,
-    List<String> episode,
-    String url,
-    String created,
   });
-
-  @override
-  $CharacterLocationCopyWith<$Res> get origin;
-  @override
-  $CharacterLocationCopyWith<$Res> get location;
 }
 
 /// @nodoc
@@ -231,17 +156,12 @@ class __$$CharacterImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? isFavorite = null,
     Object? name = null,
     Object? status = null,
     Object? species = null,
-    Object? type = null,
     Object? gender = null,
-    Object? origin = null,
-    Object? location = null,
     Object? image = null,
-    Object? episode = null,
-    Object? url = null,
-    Object? created = null,
   }) {
     return _then(
       _$CharacterImpl(
@@ -250,6 +170,11 @@ class __$$CharacterImplCopyWithImpl<$Res>
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
                     as int,
+        isFavorite:
+            null == isFavorite
+                ? _value.isFavorite
+                : isFavorite // ignore: cast_nullable_to_non_nullable
+                    as bool,
         name:
             null == name
                 ? _value.name
@@ -265,45 +190,15 @@ class __$$CharacterImplCopyWithImpl<$Res>
                 ? _value.species
                 : species // ignore: cast_nullable_to_non_nullable
                     as String,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as String,
         gender:
             null == gender
                 ? _value.gender
                 : gender // ignore: cast_nullable_to_non_nullable
                     as String,
-        origin:
-            null == origin
-                ? _value.origin
-                : origin // ignore: cast_nullable_to_non_nullable
-                    as CharacterLocation,
-        location:
-            null == location
-                ? _value.location
-                : location // ignore: cast_nullable_to_non_nullable
-                    as CharacterLocation,
         image:
             null == image
                 ? _value.image
                 : image // ignore: cast_nullable_to_non_nullable
-                    as String,
-        episode:
-            null == episode
-                ? _value._episode
-                : episode // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        url:
-            null == url
-                ? _value.url
-                : url // ignore: cast_nullable_to_non_nullable
-                    as String,
-        created:
-            null == created
-                ? _value.created
-                : created // ignore: cast_nullable_to_non_nullable
                     as String,
       ),
     );
@@ -315,18 +210,13 @@ class __$$CharacterImplCopyWithImpl<$Res>
 class _$CharacterImpl implements _Character {
   _$CharacterImpl({
     required this.id,
+    this.isFavorite = false,
     required this.name,
     required this.status,
     required this.species,
-    required this.type,
     required this.gender,
-    required this.origin,
-    required this.location,
     required this.image,
-    required final List<String> episode,
-    required this.url,
-    required this.created,
-  }) : _episode = episode;
+  });
 
   factory _$CharacterImpl.fromJson(Map<String, dynamic> json) =>
       _$$CharacterImplFromJson(json);
@@ -334,39 +224,22 @@ class _$CharacterImpl implements _Character {
   @override
   final int id;
   @override
+  @JsonKey()
+  final bool isFavorite;
+  @override
   final String name;
   @override
   final String status;
   @override
   final String species;
   @override
-  final String type;
-  @override
   final String gender;
   @override
-  final CharacterLocation origin;
-  // name and link to location
-  @override
-  final CharacterLocation location;
-  //name and link to last endpoint
-  @override
   final String image;
-  final List<String> _episode;
-  @override
-  List<String> get episode {
-    if (_episode is EqualUnmodifiableListView) return _episode;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_episode);
-  }
-
-  @override
-  final String url;
-  @override
-  final String created;
 
   @override
   String toString() {
-    return 'Character(id: $id, name: $name, status: $status, species: $species, type: $type, gender: $gender, origin: $origin, location: $location, image: $image, episode: $episode, url: $url, created: $created)';
+    return 'Character(id: $id, isFavorite: $isFavorite, name: $name, status: $status, species: $species, gender: $gender, image: $image)';
   }
 
   @override
@@ -375,18 +248,13 @@ class _$CharacterImpl implements _Character {
         (other.runtimeType == runtimeType &&
             other is _$CharacterImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.isFavorite, isFavorite) ||
+                other.isFavorite == isFavorite) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.species, species) || other.species == species) &&
-            (identical(other.type, type) || other.type == type) &&
             (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.origin, origin) || other.origin == origin) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
-            (identical(other.image, image) || other.image == image) &&
-            const DeepCollectionEquality().equals(other._episode, _episode) &&
-            (identical(other.url, url) || other.url == url) &&
-            (identical(other.created, created) || other.created == created));
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -394,17 +262,12 @@ class _$CharacterImpl implements _Character {
   int get hashCode => Object.hash(
     runtimeType,
     id,
+    isFavorite,
     name,
     status,
     species,
-    type,
     gender,
-    origin,
-    location,
     image,
-    const DeepCollectionEquality().hash(_episode),
-    url,
-    created,
   );
 
   /// Create a copy of Character
@@ -424,17 +287,12 @@ class _$CharacterImpl implements _Character {
 abstract class _Character implements Character {
   factory _Character({
     required final int id,
+    final bool isFavorite,
     required final String name,
     required final String status,
     required final String species,
-    required final String type,
     required final String gender,
-    required final CharacterLocation origin,
-    required final CharacterLocation location,
     required final String image,
-    required final List<String> episode,
-    required final String url,
-    required final String created,
   }) = _$CharacterImpl;
 
   factory _Character.fromJson(Map<String, dynamic> json) =
@@ -443,27 +301,17 @@ abstract class _Character implements Character {
   @override
   int get id;
   @override
+  bool get isFavorite;
+  @override
   String get name;
   @override
   String get status;
   @override
   String get species;
   @override
-  String get type;
-  @override
   String get gender;
   @override
-  CharacterLocation get origin; // name and link to location
-  @override
-  CharacterLocation get location; //name and link to last endpoint
-  @override
   String get image;
-  @override
-  List<String> get episode;
-  @override
-  String get url;
-  @override
-  String get created;
 
   /// Create a copy of Character
   /// with the given fields replaced by the non-null parameter values.
