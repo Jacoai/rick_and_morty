@@ -13,7 +13,7 @@ class CharacterPageView extends StatefulWidget {
 
 class _CharacterPageViewState extends State<CharacterPageView> {
   final CharacterPageBloc _bloc = CharacterPageBloc();
-  final int elementsBeforeLoading = 0;
+  final int elementsBeforeLoading = 2;
 
   @override
   void initState() {
@@ -65,7 +65,7 @@ class _CharacterPageViewState extends State<CharacterPageView> {
   }
 
   void _loadNewCharacters(int cherectersLength, int index) {
-    if (index + 1 + elementsBeforeLoading >= cherectersLength) {
+    if (index + elementsBeforeLoading >= cherectersLength) {
       _bloc.add(LoadCharactersEvent());
     }
   }

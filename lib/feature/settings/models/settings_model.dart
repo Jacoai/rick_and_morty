@@ -10,7 +10,7 @@ class SettingsModel extends ChangeNotifier {
   void changeTheme(bool isLigthTheme) {
     isLightTheme = isLigthTheme;
     _prefs.then((prefs) {
-      prefs.setBool('isLigthTheme', isLigthTheme);
+      prefs.setBool('isLightTheme', isLigthTheme);
     });
     notifyListeners();
   }

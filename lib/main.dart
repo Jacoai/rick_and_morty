@@ -11,7 +11,7 @@ void main() async {
   configureDependencies();
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool? ligthTheme = prefs.getBool('isLighthTheme');
+  bool? ligthTheme = prefs.getBool('isLightTheme');
   final model = SettingsModel(isLightTheme: ligthTheme);
 
   runApp(SettingsProvider(model: model, child: const MainApp()));
