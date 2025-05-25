@@ -54,11 +54,13 @@ class _SettingsPageViewState extends State<SettingsPageView> {
               Switch(
                 activeTrackColor: AppColors.green,
                 value: isLigthTheme,
-                onChanged: (value) {
+                onChanged: (value) async {
                   setState(() {
                     isLigthTheme = value;
-                    SettingsProvider.read(context)?.changeTheme(isLigthTheme);
                   });
+                  await SettingsProvider.read(
+                    context,
+                  )?.changeTheme(isLigthTheme);
                 },
                 thumbIcon: thumbIcon,
               ),

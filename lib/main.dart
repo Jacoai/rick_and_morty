@@ -8,11 +8,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
+  await configureDependencies();
 
-  SharedPreferences prefs = await SharedPreferences.getInstance();
+  SharedPreferences prefs = getIt();
   bool? ligthTheme = prefs.getBool('isLightTheme');
-  final model = SettingsModel(isLightTheme: ligthTheme);
+  final model = SettingsModel(isLightTheme: ligthTheme, pref: prefs);
 
   runApp(SettingsProvider(model: model, child: const MainApp()));
 }
