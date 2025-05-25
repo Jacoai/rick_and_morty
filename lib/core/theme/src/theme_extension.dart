@@ -6,8 +6,8 @@ class ThemeColors extends ThemeExtension<ThemeColors> {
   const ThemeColors({required this.accentColor});
 
   @override
-  ThemeExtension<ThemeColors> copyWith({Color? borderColor}) {
-    return ThemeColors(accentColor: borderColor ?? this.accentColor);
+  ThemeExtension<ThemeColors> copyWith({Color? accentColor}) {
+    return ThemeColors(accentColor: accentColor ?? this.accentColor);
   }
 
   @override

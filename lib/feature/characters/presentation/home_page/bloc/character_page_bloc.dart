@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:rick_and_morty/core/injector/injector.dart';
 import 'package:rick_and_morty/feature/characters/domain/models/character/character.dart';
 import 'package:rick_and_morty/feature/characters/domain/usecases/add_to_favorite_use_case.dart';
-import 'package:rick_and_morty/feature/characters/domain/usecases/get_all_chactacters_use_case.dart';
 import 'package:rick_and_morty/feature/characters/domain/usecases/remove_from_favorite_use_case.dart';
 import 'package:rick_and_morty/feature/characters/domain/usecases/stream_characters_use_case.dart';
 
@@ -21,9 +20,9 @@ class CharacterPageBloc extends Bloc<CharacterPageEvent, CharacterPageState> {
 
   final StreamCharactersUsecase _streamCharactersUsecase = getIt();
 
-  final AddToFavoriteUseCase addToFavoriteUseCase = getIt();
+  final AddToFavoriteUseCase _addToFavoriteUseCase = getIt();
 
-  final RemoveFromFavoriteUseCase removeFromFavoriteUsecase = getIt();
+  final RemoveFromFavoriteUseCase _removeFromFavoriteUsecase = getIt();
 
   Future<void> _homePageOpenedEvent(
     CharacterPageOpenedEvent event,
@@ -41,7 +40,7 @@ class CharacterPageBloc extends Bloc<CharacterPageEvent, CharacterPageState> {
     AddToFavoriteEvent event,
     Emitter<CharacterPageState> emit,
   ) async {
-    await addToFavoriteUseCase.call(event.id);
+    await _addToFavoriteUseCase.call(event.id);
     //update character in state
     List<Character> characters = _updateFavorite(
       state.characters,
@@ -56,7 +55,7 @@ class CharacterPageBloc extends Bloc<CharacterPageEvent, CharacterPageState> {
     RemoveFromFavoriteEvent event,
     Emitter<CharacterPageState> emit,
   ) async {
-    await removeFromFavoriteUsecase.call(event.id);
+    await _removeFromFavoriteUsecase.call(event.id);
 
     List<Character> characters = _updateFavorite(
       state.characters,
@@ -81,7 +80,13 @@ class CharacterPageBloc extends Bloc<CharacterPageEvent, CharacterPageState> {
   FutureOr<void> _loadCharactersEvent(
     LoadCharactersEvent event,
     Emitter<CharacterPageState> emit,
-  ) {
-    print("LOADING");
+  ) async {
+    if (state.isLoading) return;
+
+    emit(state.copyWith(isLoading: true));
+
+    await Future.delayed(Duration(seconds: 2));
+
+    emit(state.copyWith(isLoading: false));
   }
 }

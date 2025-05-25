@@ -2,8 +2,8 @@ import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rick_and_morty/core/database/database.dart';
 import 'package:rick_and_morty/feature/characters/data/api/character_api.dart';
-import 'package:rick_and_morty/feature/characters/data/converters/convertToCharacterTableData.dart';
-import 'package:rick_and_morty/feature/characters/data/converters/convertToCharecter.dart';
+import 'package:rick_and_morty/feature/characters/data/converters/convert_to_character_table_data.dart';
+import 'package:rick_and_morty/feature/characters/data/converters/convert_to_charecter.dart';
 
 import 'package:rick_and_morty/feature/characters/domain/models/character/character.dart';
 import 'package:rick_and_morty/feature/characters/domain/repository/abstract_character_repository.dart';

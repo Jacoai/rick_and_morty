@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/core/theme/theme.dart';
 import 'package:rick_and_morty/feature/characters/presentation/home_page/bloc/character_page_bloc.dart';
-import 'package:rick_and_morty/feature/characters/presentation/widgets/character_list.dart';
+import 'package:rick_and_morty/feature/characters/presentation/widgets/character_card_view.dart';
 
 class CharacterPageView extends StatefulWidget {
   const CharacterPageView({super.key});
@@ -13,20 +13,13 @@ class CharacterPageView extends StatefulWidget {
 
 class _CharacterPageViewState extends State<CharacterPageView> {
   final CharacterPageBloc _bloc = CharacterPageBloc();
-  final ScrollController _scrollController = ScrollController();
+  final int elementsBeforeLoading = 5;
 
   @override
   void initState() {
     _bloc.add(CharacterPageOpenedEvent());
-    _scrollController.addListener(_scrollListener);
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    _scrollController.removeListener(_scrollListener);
-    _scrollController.dispose();
-    super.dispose();
+    super.initState();
   }
 
   @override
@@ -43,14 +36,22 @@ class _CharacterPageViewState extends State<CharacterPageView> {
               Expanded(
                 child: BlocBuilder<CharacterPageBloc, CharacterPageState>(
                   builder: (context, state) {
-                    return CharacterList(
-                      scrollController: _scrollController,
-                      characters: state.characters,
-                      addToFavorite: (id) {
-                        _bloc.add(AddToFavoriteEvent(id: id));
-                      },
-                      removeFromFavorite: (id) {
-                        _bloc.add(RemoveFromFavoriteEvent(id: id));
+                    return ListView.builder(
+                      itemCount: state.characters.length,
+                      addAutomaticKeepAlives: false,
+                      itemBuilder: (context, index) {
+                        _loadNewCharacters(state.characters.length, index);
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: CharacterCardView(
+                            character: state.characters[index],
+                            addToFavorite:
+                                (id) => _bloc.add(AddToFavoriteEvent(id: id)),
+                            removeFromFavorite:
+                                (id) =>
+                                    _bloc.add(RemoveFromFavoriteEvent(id: id)),
+                          ),
+                        );
                       },
                     );
                   },
@@ -63,15 +64,9 @@ class _CharacterPageViewState extends State<CharacterPageView> {
     );
   }
 
-  void _scrollListener() {
-    // if (_scrollController.offset >=
-    //         _scrollController.position.maxScrollExtent &&
-    //     !_scrollController.position.outOfRange) {
-    //   //_bloc.add(LoadCharactersEvent());
-    // }
-    if (_scrollController.offset >=
-        _scrollController.position.maxScrollExtent) {
-      print("Ends");
+  void _loadNewCharacters(int cherectersLength, int index) {
+    if (index + 1 + elementsBeforeLoading >= cherectersLength) {
+      _bloc.add(LoadCharactersEvent());
     }
   }
 }

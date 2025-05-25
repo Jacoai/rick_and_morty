@@ -6,12 +6,12 @@ class CharacterCardView extends StatelessWidget {
   const CharacterCardView({
     super.key,
     required this.character,
-    required this.addToFavorite,
+    this.addToFavorite,
     required this.removeFromFavorite,
   });
 
   final Character character;
-  final Function(int) addToFavorite;
+  final Function(int)? addToFavorite;
   final Function(int) removeFromFavorite;
 
   @override
@@ -43,7 +43,7 @@ class CharacterCardView extends StatelessWidget {
                   if (character.isFavorite) {
                     removeFromFavorite(character.id);
                   } else {
-                    addToFavorite(character.id);
+                    if (addToFavorite != null) addToFavorite!(character.id);
                   }
                 },
                 icon:

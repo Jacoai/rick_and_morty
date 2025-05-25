@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/core/theme/theme.dart';
 import 'package:rick_and_morty/feature/characters/presentation/favorite_page/bloc/favorite_page_bloc.dart';
-import 'package:rick_and_morty/feature/characters/presentation/widgets/character_list.dart';
+import 'package:rick_and_morty/feature/characters/presentation/widgets/character_card_view.dart';
 
 class FavoritePageView extends StatefulWidget {
   const FavoritePageView({super.key});
@@ -35,11 +35,20 @@ class _FavoritePageViewState extends State<FavoritePageView> {
               BlocBuilder<FavoritePageBloc, FavoritePageState>(
                 builder: (context, state) {
                   return Expanded(
-                    child: CharacterList(
-                      characters: state.characters,
-                      addToFavorite: (character) {},
-                      removeFromFavorite:
-                          (id) => _bloc.add(RemoveFromFavoriteEvent(id: id)),
+                    child: ListView.builder(
+                      itemCount: state.characters.length,
+                      addAutomaticKeepAlives: false,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: CharacterCardView(
+                            character: state.characters[index],
+                            removeFromFavorite:
+                                (id) =>
+                                    _bloc.add(RemoveFromFavoriteEvent(id: id)),
+                          ),
+                        );
+                      },
                     ),
                   );
                 },
