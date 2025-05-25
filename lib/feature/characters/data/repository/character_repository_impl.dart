@@ -15,25 +15,6 @@ class CharacterRepositoryImpl implements AbstractCharacterRepository {
 
   CharacterRepositoryImpl({required this.characterApi, required this.db});
 
-  // @override
-  // Future<List<Character>> getAllCharacters() async {
-  //   var query = await db.select(db.characterTable).get();
-  //   if (query.isEmpty) {
-  //     //if there are no entyties in DB
-  //     List<Character> characters = await characterApi.getCharacters();
-  //     //save them into DB
-  //     for (var character in characters) {
-  //       await db
-  //           .into(db.characterTable)
-  //           .insert(convertToCharacterTableData(character));
-  //     }
-  //     return characters;
-  //   } else {
-  //     // or get from DB
-  //     return query.map((e) => convertToCharacter(e)).toList();
-  //   }
-  // }
-
   @override
   Future<void> addToFavorite(int id) async {
     (db.update(db.characterTable)..where(
@@ -66,4 +47,32 @@ class CharacterRepositoryImpl implements AbstractCharacterRepository {
         .map((character) => convertToCharacter(character))
         .watch();
   }
+
+  @override
+  Future<Stream<List<Character>>> streamFavoriteCharacter() async {
+    return (db.select(db.characterTable)..where(
+      (tbl) => tbl.isFavorite.equals(true),
+    )).map((character) => convertToCharacter(character)).watch();
+  }
 }
+
+
+
+  // @override
+  // Future<List<Character>> getAllCharacters() async {
+  //   var query = await db.select(db.characterTable).get();
+  //   if (query.isEmpty) {
+  //     //if there are no entyties in DB
+  //     List<Character> characters = await characterApi.getCharacters();
+  //     //save them into DB
+  //     for (var character in characters) {
+  //       await db
+  //           .into(db.characterTable)
+  //           .insert(convertToCharacterTableData(character));
+  //     }
+  //     return characters;
+  //   } else {
+  //     // or get from DB
+  //     return query.map((e) => convertToCharacter(e)).toList();
+  //   }
+  // }

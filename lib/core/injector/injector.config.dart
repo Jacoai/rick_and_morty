@@ -23,6 +23,8 @@ import '../../feature/characters/domain/usecases/remove_from_favorite_use_case.d
     as _i632;
 import '../../feature/characters/domain/usecases/stream_characters_use_case.dart'
     as _i244;
+import '../../feature/characters/domain/usecases/stream_favorite_characters_use_case.dart'
+    as _i227;
 import '../database/database.dart' as _i660;
 import '../network/network_client.dart' as _i30;
 
@@ -54,6 +56,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i244.StreamCharactersUsecase>(
       () => _i244.StreamCharactersUsecase(
+        repository: gh<_i820.AbstractCharacterRepository>(),
+      ),
+    );
+    gh.factory<_i227.StreamFavoriteCharactersUseCase>(
+      () => _i227.StreamFavoriteCharactersUseCase(
         repository: gh<_i820.AbstractCharacterRepository>(),
       ),
     );
