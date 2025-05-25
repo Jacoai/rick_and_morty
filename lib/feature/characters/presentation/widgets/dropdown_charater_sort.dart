@@ -18,7 +18,7 @@ class _DropdownCharaterSortState extends State<DropdownCharaterSort> {
   Widget build(BuildContext context) {
     return DropdownButton<SortParams>(
       value: dropdownValue,
-      dropdownColor: AppColors.green,
+      dropdownColor: Theme.of(context).extension<ThemeColors>()?.green,
       items:
           SortParams.values.map((value) {
             return DropdownMenuItem<SortParams>(
