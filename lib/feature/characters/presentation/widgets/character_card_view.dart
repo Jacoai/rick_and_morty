@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty/core/theme/theme.dart';
 import 'package:rick_and_morty/feature/characters/domain/models/character/character.dart';
 
-class CharacterCardView extends StatelessWidget {
+class CharacterCardView extends StatefulWidget {
   const CharacterCardView({
     super.key,
     required this.character,
@@ -15,12 +15,18 @@ class CharacterCardView extends StatelessWidget {
   final Function(int) removeFromFavorite;
 
   @override
+  State<CharacterCardView> createState() => _CharacterCardViewState();
+}
+
+class _CharacterCardViewState extends State<CharacterCardView> {
+  double turns = 0.0;
+
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: character.gender == 'Female' ? AppColors.pink : null,
+        color: widget.character.gender == 'Female' ? AppColors.pink : null,
         borderRadius: BorderRadius.circular(30),
         border: Border.all(
           color:
@@ -42,7 +48,7 @@ class CharacterCardView extends StatelessWidget {
                   SizedBox(
                     width: width * 0.5,
                     child: Text(
-                      character.name,
+                      widget.character.name,
                       style: AppTextStyles.h5,
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
@@ -60,7 +66,10 @@ class CharacterCardView extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
-                      child: Image.network(character.image, width: width * 0.5),
+                      child: Image.network(
+                        widget.character.image,
+                        width: width * 0.5,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -71,48 +80,55 @@ class CharacterCardView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //spacing: 12,
+
                   children: [
                     Align(
                       alignment: Alignment.topRight,
-                      child: IconButton(
-                        onPressed: () {
-                          if (character.isFavorite) {
-                            removeFromFavorite(character.id);
-                          } else {
-                            if (addToFavorite != null) {
-                              addToFavorite!(character.id);
+                      child: AnimatedRotation(
+                        turns: turns,
+                        duration: Duration(milliseconds: 700),
+                        child: IconButton(
+                          onPressed: () {
+                            if (widget.character.isFavorite) {
+                              widget.removeFromFavorite(widget.character.id);
+                            } else {
+                              if (widget.addToFavorite != null) {
+                                widget.addToFavorite!(widget.character.id);
+                              }
                             }
-                          }
-                        },
-                        icon:
-                            character.isFavorite
-                                ? Icon(
-                                  Icons.star,
-                                  color:
-                                      Theme.of(
-                                        context,
-                                      ).extension<ThemeColors>()?.accentColor,
-                                )
-                                : Icon(
-                                  Icons.star_border,
-                                  color:
-                                      Theme.of(
-                                        context,
-                                      ).extension<ThemeColors>()?.accentColor,
-                                ),
+                            setState(() {
+                              turns = turns == 1 ? 0 : 1;
+                            });
+                          },
+                          icon:
+                              widget.character.isFavorite
+                                  ? Icon(
+                                    Icons.star,
+                                    color:
+                                        Theme.of(
+                                          context,
+                                        ).extension<ThemeColors>()?.accentColor,
+                                  )
+                                  : Icon(
+                                    Icons.star_border,
+                                    color:
+                                        Theme.of(
+                                          context,
+                                        ).extension<ThemeColors>()?.accentColor,
+                                  ),
+                        ),
                       ),
                     ),
                     Text(
-                      "Пол: ${character.gender}",
+                      "Пол: ${widget.character.gender}",
                       style: AppTextStyles.baseText,
                     ),
                     Text(
-                      "Статус: ${character.status}",
+                      "Статус: ${widget.character.status}",
                       style: AppTextStyles.baseText,
                     ),
                     Text(
-                      "Вид: ${character.species}",
+                      "Вид: ${widget.character.species}",
                       style: AppTextStyles.baseText,
                     ),
                     const SizedBox(height: 8),
@@ -122,75 +138,6 @@ class CharacterCardView extends StatelessWidget {
             ],
           ),
         ),
-        // Column(
-        //   spacing: 8,
-        //   children: [
-        //     Row(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children: [
-        //         Expanded(
-        //           child: Text(
-        //             character.name,
-        //             style: AppTextStyles.h5,
-        //             textAlign: TextAlign.center,
-        //             overflow: TextOverflow.clip,
-        //           ),
-        //         ),
-        //         IconButton(
-        //           onPressed: () {
-        //             if (character.isFavorite) {
-        //               removeFromFavorite(character.id);
-        //             } else {
-        //               if (addToFavorite != null) addToFavorite!(character.id);
-        //             }
-        //           },
-        //           icon:
-        //               character.isFavorite
-        //                   ? Icon(
-        //                     Icons.star,
-        //                     color:
-        //                         Theme.of(
-        //                           context,
-        //                         ).extension<ThemeColors>()?.accentColor,
-        //                   )
-        //                   : Icon(
-        //                     Icons.star_border,
-        //                     color:
-        //                         Theme.of(
-        //                           context,
-        //                         ).extension<ThemeColors>()?.accentColor,
-        //                   ),
-        //         ),
-        //       ],
-        //     ),
-        //     Row(
-        //       children: [
-        //
-        //         Column(
-        //           children: [
-        //             Text(
-        //               "Пол: ${character.gender}",
-        //               style: AppTextStyles.baseText,
-        //             ),
-        //             Text(
-        //               "Статус: ${character.status}",
-        //               style: AppTextStyles.baseText,
-        //             ),
-        //             Text(
-        //               "Вид: ${character.species}",
-        //               style: AppTextStyles.baseText,
-        //             ),
-        //             Text(
-        //               "Пол: ${character.gender}",
-        //               style: AppTextStyles.baseText,
-        //             ),
-        //           ],
-        //         ),
-        //       ],
-        //     ),
-        //     const SizedBox(height: 8),
-        //   ],
-        // ),
       ),
     );
   }
