@@ -20,6 +20,7 @@ class CharacterCardView extends StatelessWidget {
 
     return DecoratedBox(
       decoration: BoxDecoration(
+        color: character.gender == 'Female' ? AppColors.pink : null,
         borderRadius: BorderRadius.circular(30),
         border: Border.all(
           color:
