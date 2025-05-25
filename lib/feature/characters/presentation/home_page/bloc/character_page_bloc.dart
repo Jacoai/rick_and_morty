@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:rick_and_morty/core/injector/injector.dart';
+import 'package:rick_and_morty/core/shared/constants.dart';
 import 'package:rick_and_morty/feature/characters/domain/models/character/character.dart';
 import 'package:rick_and_morty/feature/characters/domain/usecases/add_to_favorite_use_case.dart';
+import 'package:rick_and_morty/feature/characters/domain/usecases/load_characters_use_case.dart';
 import 'package:rick_and_morty/feature/characters/domain/usecases/remove_from_favorite_use_case.dart';
 import 'package:rick_and_morty/feature/characters/domain/usecases/stream_characters_use_case.dart';
 
@@ -23,6 +25,7 @@ class CharacterPageBloc extends Bloc<CharacterPageEvent, CharacterPageState> {
   final AddToFavoriteUseCase _addToFavoriteUseCase = getIt();
 
   final RemoveFromFavoriteUseCase _removeFromFavoriteUsecase = getIt();
+  final LoadCharactersUseCase _loadCharactersUseCase = getIt();
 
   Future<void> _homePageOpenedEvent(
     CharacterPageOpenedEvent event,
@@ -77,7 +80,7 @@ class CharacterPageBloc extends Bloc<CharacterPageEvent, CharacterPageState> {
     return characters;
   }
 
-  FutureOr<void> _loadCharactersEvent(
+  Future<void> _loadCharactersEvent(
     LoadCharactersEvent event,
     Emitter<CharacterPageState> emit,
   ) async {
@@ -85,7 +88,12 @@ class CharacterPageBloc extends Bloc<CharacterPageEvent, CharacterPageState> {
 
     emit(state.copyWith(isLoading: true));
 
-    await Future.delayed(Duration(seconds: 2));
+    await _loadCharactersUseCase.call(
+      List.generate(
+        Constants.charactersPagination,
+        (index) => state.characters.length + index + 1,
+      ),
+    );
 
     emit(state.copyWith(isLoading: false));
   }

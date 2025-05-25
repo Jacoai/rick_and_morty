@@ -19,6 +19,8 @@ import '../../feature/characters/domain/repository/abstract_character_repository
     as _i820;
 import '../../feature/characters/domain/usecases/add_to_favorite_use_case.dart'
     as _i888;
+import '../../feature/characters/domain/usecases/load_characters_use_case.dart'
+    as _i837;
 import '../../feature/characters/domain/usecases/remove_from_favorite_use_case.dart'
     as _i632;
 import '../../feature/characters/domain/usecases/stream_characters_use_case.dart'
@@ -63,6 +65,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i227.StreamFavoriteCharactersUseCase(
         repository: gh<_i820.AbstractCharacterRepository>(),
       ),
+    );
+    gh.factory<_i837.LoadCharactersUseCase>(
+      () =>
+          _i837.LoadCharactersUseCase(gh<_i820.AbstractCharacterRepository>()),
     );
     return this;
   }

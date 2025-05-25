@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rick_and_morty/core/database/database.dart';
+import 'package:rick_and_morty/core/shared/constants.dart';
 import 'package:rick_and_morty/feature/characters/data/api/character_api.dart';
 import 'package:rick_and_morty/feature/characters/data/converters/convert_to_character_table_data.dart';
 import 'package:rick_and_morty/feature/characters/data/converters/convert_to_charecter.dart';
@@ -34,13 +35,9 @@ class CharacterRepositoryImpl implements AbstractCharacterRepository {
     var query = await db.select(db.characterTable).get();
     if (query.isEmpty) {
       //if there are no entyties in DB
-      List<Character> characters = await characterApi.getCharacters();
-      //save them into DB
-      for (var character in characters) {
-        await db
-            .into(db.characterTable)
-            .insert(convertToCharacterTableData(character));
-      }
+      await loadListCharacters(
+        List.generate(Constants.charactersPagination, (index) => index + 1),
+      );
     }
     return db
         .select(db.characterTable)
@@ -48,11 +45,25 @@ class CharacterRepositoryImpl implements AbstractCharacterRepository {
         .watch();
   }
 
+  Future<void> insertCharacters(List<Character> characters) async {
+    for (var character in characters) {
+      await db
+          .into(db.characterTable)
+          .insert(convertToCharacterTableData(character));
+    }
+  }
+
   @override
   Future<Stream<List<Character>>> streamFavoriteCharacter() async {
     return (db.select(db.characterTable)..where(
       (tbl) => tbl.isFavorite.equals(true),
     )).map((character) => convertToCharacter(character)).watch();
+  }
+
+  @override
+  Future<void> loadListCharacters(List<int> ids) async {
+    final characters = await characterApi.getListCharacters(ids);
+    await insertCharacters(characters);
   }
 }
 

@@ -15,7 +15,7 @@ class LocalDatabase extends _$LocalDatabase {
 
   static QueryExecutor _openConnection() {
     return driftDatabase(
-      name: 'my_database_v1',
+      name: 'my_database_v1.01',
       native: const DriftNativeOptions(
         databaseDirectory: getApplicationSupportDirectory,
       ),

@@ -8,7 +8,7 @@ class NetworkClient {
 
   NetworkClient() {
     _dio = Dio();
-    _dio.options = BaseOptions(baseUrl: Constant.apiBaseUrl);
+    _dio.options = BaseOptions(baseUrl: Constants.apiBaseUrl);
   }
 
   get dio => _dio;

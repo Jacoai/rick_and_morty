@@ -13,7 +13,7 @@ class CharacterPageView extends StatefulWidget {
 
 class _CharacterPageViewState extends State<CharacterPageView> {
   final CharacterPageBloc _bloc = CharacterPageBloc();
-  final int elementsBeforeLoading = 5;
+  final int elementsBeforeLoading = 0;
 
   @override
   void initState() {
